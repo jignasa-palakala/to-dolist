@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>to do list</title>
+        <style>
+            body {
+                background-color: rgb(105, 5, 32);
+                font-family: Arial, sans-serif;
+            }
+
+            input {
+                border: solid 1px white;
+                border-radius: 5px;
+                padding: 5px;
+            }
+
+            input:focus {
+                outline: none;
+                box-shadow: none;
+                border: 1px solid #ccc;
+            }
+
+            .page {
+                margin: 70px auto;
+                width: 600px;
+                background-color: rgb(187, 180, 171);
+                padding: 20px;
+                border-radius: 20px;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            }
+
+            .block {
+                text-align: center;
+            }
+
+            button {
+                border-radius: 10px;
+                color: white;
+                background-color: rgb(81, 70, 72);
+                padding: 5px 10px;
+                border: none;
+                margin-left: 5px;
+            }
+
+            button:hover {
+                background-color: rgb(5, 6, 6);
+                cursor: pointer;
+            }
+
+            ul {
+                list-style: none;
+                padding: 0;
+                margin-top: 20px;
+            }
+
+            li {
+                background: white;
+                padding: 10px;
+                margin-left: 70px;
+                margin-right: 70px;
+                margin-bottom: 10px;
+                border-radius: 10px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .delete-btn {
+                background-color: rgb(156, 38, 62);
+                color: white;
+                border: none;
+                border-radius: 10px;
+                padding: 5px 10px;
+            }
+
+            .delete-btn:hover {
+                background-color: rgb(134, 30, 30);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="page">
+            <div class="block">
+                <center><h1>Just do it!</h1></center>
+                <label>please enter a task......</label><br>
+                <input type="text" id="task">
+                <button onclick="addTask()">add</button>
+                <ul id="task-list"></ul>
+            </div>
+            <div classes></div>
+        </div>
+        <script>
+            function addTask() {
+            const taskInput = document.getElementById("task");
+            const taskValue = taskInput.value.trim();
+
+            if (taskValue === "") {
+                alert("Please enter a task.");
+                return;
+            }
+
+            const ul = document.getElementById("task-list");
+            const li = document.createElement("li");
+
+            li.innerHTML = `
+                ${taskValue}
+                <button class="delete-btn" onclick="removeTask(this)">Delete</button>
+            `;
+
+            ul.appendChild(li);
+            taskInput.value = "";
+            }
+
+            function removeTask(button) {
+            button.parentElement.remove();
+            }
+            document.getElementById("task").addEventListener("keypress", function (e) {
+            if (e.key === "Enter") {
+                addTask();
+            }
+            });
+        </script>
+    </body>
+</html>
